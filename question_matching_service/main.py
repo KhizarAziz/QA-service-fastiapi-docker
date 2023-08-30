@@ -8,8 +8,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np  # For number stuff like finding the maximum
 
 # Importing our database and models
-from .database import SessionLocal, engine
-from . import models
+from commons.database import SessionLocal, engine
+from commons import models
 
 # Make the tables in the database
 models.Base.metadata.create_all(bind=engine)

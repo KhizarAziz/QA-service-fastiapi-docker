@@ -1,7 +1,7 @@
 # Import FastAPI and HTTP library
 from fastapi import FastAPI, HTTPException
 import requests  # To make HTTP requests to our second API
-
+from commons import constants
 # Initialize our FastAPI app
 app = FastAPI()
 
@@ -9,7 +9,7 @@ app = FastAPI()
 @app.get("/ask/")
 def ask_question(question: str):
     # URL for our second API service
-    matching_service_url = "http://localhost:8001/match/"
+    matching_service_url = constants.QA_MATCHING_SERVICE
     
     # Trying to get answer from the second API
     try:
@@ -27,4 +27,4 @@ def ask_question(question: str):
         
     except Exception as e:
         # If something went wrong, let's tell the user
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e)+"This is the error")
