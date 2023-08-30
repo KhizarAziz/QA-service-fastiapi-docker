@@ -33,11 +33,10 @@ docker-compose up
 
 
 ## API Endpoints
-## API Endpoints
 
 ### Question Answer Service
-
-**POST `/question/`**
+- **Port**: 8000
+**POST `/ask/`**
 
 - **Description**: Takes in a question and returns an answer from the knowledge base.
 - **Request Body**: 
@@ -54,7 +53,7 @@ docker-compose up
     ```
 
 ### Answer Matching Service
-
+- **Port**: 8001
 **POST `/match/`**
 
 - **Description**: Takes in a question and finds a relevant question in the knowledge base, returns the matching answer.
@@ -73,7 +72,7 @@ docker-compose up
     ```
 
 ### Conversation History Service
-
+- **Port**: 8002
 **POST `/store/`**
 
 - **Description**: Stores the question and answer pair into the knowledge base.
