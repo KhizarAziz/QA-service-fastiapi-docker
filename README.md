@@ -33,7 +33,69 @@ docker-compose up
 
 
 ## API Endpoints
-(TBD: describe endpoints here)
+## API Endpoints
+
+### Question Answer Service
+
+**POST `/question/`**
+
+- **Description**: Takes in a question and returns an answer from the knowledge base.
+- **Request Body**: 
+    ```json
+    {
+        "question": "What is the capital of France?"
+    }
+    ```
+- **Response**: 
+    ```json
+    {
+        "answer": "Paris"
+    }
+    ```
+
+### Answer Matching Service
+
+**POST `/match/`**
+
+- **Description**: Takes in a question and finds a relevant question in the knowledge base, returns the matching answer.
+- **Request Body**: 
+    ```json
+    {
+        "question": "Tell me the French capital."
+    }
+    ```
+- **Response**: 
+    ```json
+    {
+        "matched_question": "What is the capital of France?",
+        "answer": "Paris"
+    }
+    ```
+
+### Conversation History Service
+
+**POST `/store/`**
+
+- **Description**: Stores the question and answer pair into the knowledge base.
+- **Request Body**: 
+    ```json
+    {
+        "question": "What is the capital of France?",
+        "answer": "Paris"
+    }
+    ```
+- **Response**: 
+    ```json
+    {
+        "status": "Stored"
+    }
+    ```
+
+**GET `/fetch_last/`**
+
+- **Description**: Fetches the last N conversations from the knowledge base.
+- **Query Parameters**: `n` (default: 5)
+
 
 ## Testing
 (TBD)
