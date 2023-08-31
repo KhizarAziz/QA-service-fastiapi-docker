@@ -31,6 +31,10 @@ export DB_URL=YOUR_DB_URL  # Example: sqlite:///commons/knowledge_base.db
 docker-compose up
 ```
 
+4. (Optional) Re-run failed: (incase a service stopped right after booting up)
+```bash
+docker-compose up FAILED_SERVICE_NAME
+```
 
 ## API Endpoints
 
