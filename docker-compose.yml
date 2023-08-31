@@ -1,13 +1,15 @@
 version: '3.8'
 
 services:
-  # question_api:
-  #   build: ./question_answer_service/
-  #   volumes:
-  #     - ./question_answer_service:/app
-  #     - ./commons:/commons
-  #     - ./requirements.txt:/app/requirements.txt
-  #   command: ["/bin/bash", "/app/start.sh"]
+  question_api:
+    build: ./question_answer_service/
+    volumes:
+      - ./question_answer_service:/app
+      - ./commons:/app/commons
+      - ./requirements.txt:/app/requirements.txt
+    command: ["/bin/bash", "/app/start.sh"]
+    ports:
+      - "8000:8000"  
 
   matching_api:
     build: ./question_matching_service/
@@ -21,14 +23,14 @@ services:
     ports:
       - "8001:8001"
   
-  # storage_api:
-  #   build: ./conversation_history_service/
-  #   volumes:
-  #     - ./conversation_history_service:/app
-  #     - ./commons:/commons
-  #     - ./requirements.txt:/app/requirements.txt
-  #   command: ["/bin/bash", "/app/start.sh"]
-  #   environment:
-  #     - DB_URL=${DB_URL}
-      # ports:
-      # - "8002:8002"  
+  storage_api:
+    build: ./conversation_history_service/
+    volumes:
+      - ./conversation_history_service:/app
+      - ./commons:/app/commons
+      - ./requirements.txt:/app/requirements.txt
+    command: ["/bin/bash", "/app/start.sh"]
+    environment:
+      - DB_URL=${DB_URL}
+    ports:
+      - "8002:8002"
