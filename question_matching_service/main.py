@@ -2,14 +2,20 @@
 from fastapi import FastAPI, Depends
 # Importing Session to interact with the database
 from sqlalchemy.orm import Session
-# For text processing and finding similarity
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np  # For number stuff like finding the maximum
 
 # Importing our database and models
 from commons.database import SessionLocal, engine
 from commons import models
+
+# For text processing and finding similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel
+import numpy as np  # For number stuff like finding the maximum
+
+tfidf_vectorizer = TfidfVectorizer()
+questions_cache = []
+vectors_cache = None
+matching_threshold = 0.7
 
 # Make the tables in the database
 models.Base.metadata.create_all(bind=engine)
@@ -25,30 +31,36 @@ def get_db():
     finally:
         db.close()  # Close it when done
 
-# This is our API endpoint. It matches questions!
 @app.post("/match/")
 def match_question(question: str, db: Session = Depends(get_db)):
-    # Get questions and answers from the database
-    questions_answers = db.query(models.QuestionAnswer).all()
-    # Just the questions
-    questions = [x.question for x in questions_answers]
-    # Just the answers
-    answers = [x.answer for x in questions_answers]
-    
-    # Add the new question to the list of old questions
-    questions.append(question)
+    try:
+        global vectors_cache
+        global questions_cache
 
-    # Turn text into numbers so the computer can understand
-    vectorizer = CountVectorizer().fit_transform(questions)
-    vectors = vectorizer.toarray()
+        # Get questions and answers from the database
+        questions_answers = db.query(models.QuestionAnswer).all()
 
-    # Find out how similar the new question is to the old ones
-    cosine_matrix = cosine_similarity(vectors)
-    # Just the similarities for the new question
-    similarity_scores = cosine_matrix[-1][:-1]
+        # Check if the cache is stale
+        if len(questions_cache) != len(questions_answers):
+            questions_cache = [x.question for x in questions_answers]
+            vectors_cache = tfidf_vectorizer.fit_transform(questions_cache).toarray()
 
-    # Find the old question that is most similar to the new one
-    matched_index = np.argmax(similarity_scores)
+        # Vectorize the new question
+        new_vector = tfidf_vectorizer.transform([question]).toarray()
 
-    # Return the answer for the most similar old question
-    return {"question": question, "answer": answers[matched_index]}
+        # Calculate similarity scores
+        similarity_scores = linear_kernel(new_vector, vectors_cache).flatten()
+
+        # Find the index of the most similar question
+        matched_index = np.argmax(similarity_scores)
+
+        # Extract just the answers
+        answers = [x.answer for x in questions_answers]
+
+        # Check if similarity is above threshold
+        if similarity_scores[matched_index] >= matching_threshold:
+            return {"question": question, "answer": answers[matched_index]}
+        else:
+            return {"question": question, "answer": "No answer found"}
+    except Exception as e:
+        return f"Question Macthing Service Failed: {e}"

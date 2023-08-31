@@ -100,6 +100,9 @@ docker-compose up FAILED_SERVICE_NAME
 - **Query Parameters**: `n` (default: 5)
 
 
+## Future works
+- Improve question matching service (Word2Vec, BERT)
+
 ## Testing
 (TBD)
 

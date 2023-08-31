@@ -21,10 +21,10 @@ def ask_question(question: str):
         
         # Fetch the answer from the response dictionary
         answer = result.get('answer', 'No answer found')
-        
+
         # Return the final answer
         return {"question": question, "answer": answer}
         
     except Exception as e:
         # If something went wrong, let's tell the user
-        raise HTTPException(status_code=500, detail=str(e)+"This is the error")
+        raise HTTPException(status_code=500, detail=str(e))
