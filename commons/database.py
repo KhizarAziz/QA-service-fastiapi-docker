@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from commons import constants
 
 # This is the path to our database file
-DATABASE_URL = constants.DB
+DATABASE_URL = constants.DB_URL
 
 # This line creates a 'connection' to our database
 engine = create_engine(DATABASE_URL)
