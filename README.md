@@ -18,20 +18,23 @@ The repository contains three services:
 
 ## How to Run
 1. Clone the repository:
+Download and Setup Docker!
+
+2. Clone the repository:
 ```bash
 git clone <repo_link>
 ```
-2. Set the database URL:
+3. Set the database URL:
 ```bash
 export DB_URL=YOUR_DB_URL  # Example: sqlite:///commons/knowledge_base.db
 ```
 
-3. Build and run the services:
+4. Build and run the services:
 ```bash
 docker-compose up
 ```
 
-4. (Optional) Re-run failed: (incase a service stopped right after booting up)
+5. (Optional) Re-run failed service: (incase a service stopped right after booting up)
 ```bash
 docker-compose up FAILED_SERVICE_NAME
 ```
