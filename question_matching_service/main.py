@@ -59,8 +59,8 @@ def match_question(question: str, db: Session = Depends(get_db)):
 
         # Check if similarity is above threshold
         if similarity_scores[matched_index] >= matching_threshold:
-            return {"question": question, "answer": answers[matched_index]}
+            return {"question": question, "answer": answers[matched_index],"answer_found":1}
         else:
-            return {"question": question, "answer": "No answer found"}
+            return {"question": question,"answer_found":0}
     except Exception as e:
         return f"Question Macthing Service Failed: {e}"

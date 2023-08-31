@@ -19,8 +19,10 @@ def ask_question(question: str):
         # Convert JSON response to Python dictionary
         result = response.json()
         
-        # Fetch the answer from the response dictionary
-        answer = result.get('answer', 'No answer found')
+        if result.get('answer_found'):
+            answer = result.get('answer') # Fetch the answer from the response dictionary
+        else:
+            answer = "No Answer Found!"
 
         # Return the final answer
         return {"question": question, "answer": answer}
