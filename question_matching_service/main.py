@@ -15,7 +15,7 @@ import numpy as np  # For number stuff like finding the maximum
 tfidf_vectorizer = TfidfVectorizer()
 questions_cache = []
 vectors_cache = None
-matching_threshold = 0.7
+matching_threshold = 0.5
 
 # Make the tables in the database
 models.Base.metadata.create_all(bind=engine)
@@ -59,8 +59,8 @@ def match_question(question: str, db: Session = Depends(get_db)):
 
         # Check if similarity is above threshold
         if similarity_scores[matched_index] >= matching_threshold:
-            return {"question": question, "answer": answers[matched_index],"answer_found":1}
+            return {"question": question, "answer": answers[matched_index]}
         else:
-            return {"question": question,"answer_found":0}
+            return {"question": question}
     except Exception as e:
         return f"Question Macthing Service Failed: {e}"

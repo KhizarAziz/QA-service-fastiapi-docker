@@ -14,15 +14,13 @@ def ask_question(question: str):
     # Trying to get answer from the second API
     try:
         # Make the POST request to the second API and get response
-        response = requests.post(matching_service_url, json={"question": question})
+        response = requests.post(f"{matching_service_url}?question={question}")
         
         # Convert JSON response to Python dictionary
         result = response.json()
         
-        if result.get('answer_found'):
-            answer = result.get('answer') # Fetch the answer from the response dictionary
-        else:
-            answer = "No Answer Found!"
+        # Fetch the answer from the response dictionary
+        answer = result.get("answer","No Answer Found!") 
 
         # Return the final answer
         return {"question": question, "answer": answer}

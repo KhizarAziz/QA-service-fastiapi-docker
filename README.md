@@ -18,13 +18,11 @@ The repository contains three services:
 
 ## How to Run
 1. Clone the repository:
-Download and Setup Docker!
+Download, Setup and run Docker!
 
-2. Clone the repository:
-```bash
-git clone <repo_link>
-```
-3. Set the database URL:
+2. Clone this repository.
+
+3. Set path to wherever you want to save your sqlite DB file:
 ```bash
 export DB_URL=YOUR_DB_URL  # Example: sqlite:///commons/knowledge_base.db
 ```
@@ -105,6 +103,10 @@ docker-compose up FAILED_SERVICE_NAME
 
 ## Future works
 - Improve question matching service (Word2Vec, BERT)
+- Utilize BloomFilter for faster matching.
+- Have a better matching threshold.
+- Improve architecture (e.g params as models (question))
+
 
 ## Testing
 (TBD)
