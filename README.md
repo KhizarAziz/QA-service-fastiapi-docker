@@ -17,8 +17,7 @@ The repository contains three services:
 - Docker Compose
 
 ## How to Run
-1. Clone the repository:
-Download, Setup and run Docker!
+1. Download, Setup and run Docker!
 
 2. Clone this repository.
 
