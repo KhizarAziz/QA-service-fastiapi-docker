@@ -108,10 +108,10 @@ docker-compose up FAILED_SERVICE_NAME
 
 
 ## Testing
-(TBD)
+(TBD) To be done
 
 ## Troubleshooting
-(TBD)
+(TBD) To be done
 
 ## Contributions
 Feel free to submit pull requests or open issues to contribute to the project.
