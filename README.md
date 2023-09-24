@@ -1,7 +1,5 @@
-# IU FastAPI Services
-
 ## Introduction
-This repository hosts the task given by IU (International University of Sciences). The task involves developing three FastAPI services to answer questions using a knowledge base while maintaining a conversation history.
+This repo have a starter code for Question and Answering Service.
 
 ## Components
 The repository contains three services:
