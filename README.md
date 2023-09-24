@@ -4,11 +4,11 @@ This repo have a starter code for Question and Answering Service.
 ## Components
 The repository contains three services:
 
-1. **Question-Answer Service**: Located in the `question_answer_service` directory. Takes a question and returns an answer.
+1. **Question-Answer Service**: Located in the `question_answer_service` directory. Takes a question, calls answer macthing service to get an answer and returns the answer.
   
-2. **Answer Matching Service**: Located in the `answer_matching_service` directory. Takes a question and matches it to a relevant answer in a knowledge base.
+2. **Answer Matching Service**: Located in the `answer_matching_service` directory. Takes a question and matches (using tf-idf and linear kernel) it to a relevant answer in a knowledge base.
   
-3. **Conversation History Service**: Located in the `conversation_history_service` directory. Stores question and answer pairs into a knowledge base.
+3. **Conversation History Service**: Located in the `conversation_history_service` directory. Stores question and answer pairs into a knowledge base (local db for now).
 
 ## Prerequisites
 - Docker
