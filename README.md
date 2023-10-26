@@ -1,5 +1,5 @@
 ## Introduction
-This repo have a starter code for Question and Answering Service.
+This repo have a starter code for Question and Answering Service developed with FastAPI, Docker-compose and MySQL.
 
 ## Components
 The repository contains three services:
